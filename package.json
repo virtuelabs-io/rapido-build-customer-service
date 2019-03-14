@@ -5,10 +5,10 @@
   "scripts": {
     "test": "jest",
     "codecov": "npm run test & npm run codecov",
-    "dev-deploy": "serverless deploy --stage dev --aws-profile rapido-devops",
-    "prod-deploy": "serverless deploy --stage prod --aws-profile rapido-devops",
-    "dev-remove": "serverless remove --stage dev --aws-profile rapido-devops",
-    "prod-remove": "serverless remove --stage prod --aws-profile rapido-devops",
+    "dev-deploy": "serverless deploy --stage dev",
+    "prod-deploy": "serverless deploy --stage prod",
+    "dev-remove": "serverless remove --stage dev",
+    "prod-remove": "serverless remove --stage prod",
     "lint": "./node_modules/.bin/eslint src"
   },
   "author": "",
