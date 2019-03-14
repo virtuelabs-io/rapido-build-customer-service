@@ -20,6 +20,7 @@ steps:
     versionSpec: '8.x'
 
 - script: |
+    pip install setuptools
     pip install awscli
   displayName: 'Installing AWS CLI'
 
