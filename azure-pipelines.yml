@@ -47,22 +47,14 @@ steps:
     CLIENT_ID: $(DEV_CLIENT_ID)
   condition: ne(variables['Build.SourceBranch'], 'refs/heads/master')
 
-# - task: Npm@1
-#   displayName: 'Deploying functions to PROD'
-#   inputs:
-#     command: custom
-#     customCommand: 'run dev-deploy' # will be changed to prod when we are going to go live
-#   env:
-#     AWS_ACCESS_KEY_ID: $(PROD_AWS_ACCESS_KEY_ID)
-#     AWS_SECRET_ACCESS_KEY: $(PROD_AWS_SECRET_ACCESS_KEY)
-#     USER_POOL_ID: $(PROD_USER_POOL_ID)
-#     CLIENT_ID: $(PROD_CLIENT_ID)
-#   condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
-
-- script: |
-    npm run dev-deploy || true
-    cat /home/vsts/.npm/_logs/*debug.log
-    aws ec2 describe-instances
-    printenv
-  displayName: 'Installing AWS CLI'
+- task: Npm@1
+  displayName: 'Deploying functions to PROD'
+  inputs:
+    command: custom
+    customCommand: 'run dev-deploy' # will be changed to prod when we are going to go live
+  env:
+    AWS_ACCESS_KEY_ID: $(PROD_AWS_ACCESS_KEY_ID)
+    AWS_SECRET_ACCESS_KEY: $(PROD_AWS_SECRET_ACCESS_KEY)
+    USER_POOL_ID: $(PROD_USER_POOL_ID)
+    CLIENT_ID: $(PROD_CLIENT_ID)
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
