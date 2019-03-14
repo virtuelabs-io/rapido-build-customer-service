@@ -1,0 +1,8 @@
+{
+    "create": {
+        "email": "user@user.com",
+        "password": "User1234567",
+        "phoneNumber": "+443456567678",
+        "name": "Username"
+    }
+}

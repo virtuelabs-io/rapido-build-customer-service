@@ -5,8 +5,16 @@ provider:
   runtime: nodejs8.10
   stage: dev
   region: eu-west-2
-  cognito-client-id: 2lbm1o9ac31t5nq71dt5gia81q
-  cognito-user-pool-id: eu-west-2_WyEt6hT20
+  cognito-client-id: ${env:CLIENT_ID}
+  cognito-user-pool-id: ${env:USER_POOL_ID}
+
+package:
+  individually: true
+  excludeDevDependencies: true
+  exclude:
+    - test/**
+    - .git/**
+    - .serverless/**
 
 functions:
   userSignUp:
@@ -28,9 +36,6 @@ functions:
         #   authorizer:
         #     name: authorizer
         #     arn: arn:aws:cognito-idp:eu-west-2:007938441437:userpool/eu-west-2_ZmuHKSNeS
-    package:
-      individually: false
-      excludeDevDependencies: true
 
 # plugins:
 #   - serverless-domain-manager
