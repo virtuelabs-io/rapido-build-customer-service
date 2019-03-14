@@ -1,0 +1,75 @@
+service: Authentication
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: eu-west-2
+  cognito-client-id: 2lbm1o9ac31t5nq71dt5gia81q
+  cognito-user-pool-id: eu-west-2_WyEt6hT20
+
+functions:
+  userSignUp:
+    name: userSignUp-${self:provider.stage}
+    role: AuthenticationFunctionsLambdaRole
+    handler: src/signUp.fun
+    memorySize: 128
+    timeout: 10
+    environment:
+      USER_POOL_ID: ${self:provider.cognito-user-pool-id}
+      CLIENT_ID: ${self:provider.cognito-client-id}
+    tags:
+      purpose: lambda function for signing up a user with cognito
+    events:
+      - http:
+          path: /auth/sign-up
+          method: post
+        #   integration: lambda
+        #   authorizer:
+        #     name: authorizer
+        #     arn: arn:aws:cognito-idp:eu-west-2:007938441437:userpool/eu-west-2_ZmuHKSNeS
+    package:
+      individually: false
+      excludeDevDependencies: true
+
+# plugins:
+#   - serverless-domain-manager
+
+# custom:
+#   customDomain:
+#     domainName: serverless.rapidobuild.com
+#     basePath: api
+#     stage: ${self:provider.stage}
+#     createRoute53Record: true
+#     endpointType: regional
+
+resources:
+  Resources:
+    AuthenticationFunctionsLambdaRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: "sts:AssumeRole"
+        Path: /
+        Policies:
+          - PolicyName: logs
+            PolicyDocument:
+              Statement:
+                Effect: Allow
+                Action:
+                  - "logs:CreateLogGroup"
+                  - "logs:CreateLogStream"
+                  - "logs:PutLogEvents"
+                Resource: "arn:aws:logs:*:*:*"
+          - PolicyName: lambda
+            PolicyDocument:
+              Statement:
+                Effect: Allow
+                Action:
+                  - "lambda:InvokeFunction"
+                Resource: "*"
