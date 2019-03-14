@@ -36,12 +36,14 @@ steps:
     customCommand: 'run test'
 
 - task: PublishTestResults@2
+  displayName: 'Publishing test results'
   condition: succeededOrFailed()
   inputs:
     testRunner: JUnit
     testResultsFiles: '**/junit.xml'
 
 - task: PublishCodeCoverageResults@1
+  displayName: 'Publishing code coverage'
   inputs:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/*coverage.xml'
