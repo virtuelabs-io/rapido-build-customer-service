@@ -114,3 +114,4 @@ About
 
 # Rapido Custom
 .secrets
+/test/*.xml

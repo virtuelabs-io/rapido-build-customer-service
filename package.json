@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Rapido build authentication",
   "scripts": {
-    "test": "jest",
+    "test": "jest --ci --reporters=jest-junit --reporters=default --coverage --coverageReporters=cobertura --coverageReporters=html",
     "codecov": "npm run test & npm run codecov",
     "dev-deploy": "serverless deploy --stage dev",
     "prod-deploy": "serverless deploy --stage prod",
@@ -19,6 +19,8 @@
     "codecov": "^3.2.0",
     "eslint": "^5.15.1",
     "jest": "^24.5.0",
+    "jest-junit": "^6.3.0",
+    "jest-junit-reporter": "^1.1.0",
     "json-loader": "^0.5.7",
     "prettier": "^1.16.4",
     "serverless": "^1.38.0",
@@ -35,5 +37,8 @@
   "jest": {
     "coverageDirectory": "./coverage/",
     "collectCoverage": true
+  },
+  "jest-junit": {
+    "output": "./test/junit.xml"
   }
 }
