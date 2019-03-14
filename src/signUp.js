@@ -5,13 +5,11 @@ module.exports.fun = async (event, context) => {
     var AmazonCognitoIdentity = require('amazon-cognito-identity-js');
     var cognitoSchema = require('./commons/cognitoSchema');
     var responseHandler = require('./commons/response');
+    var cognitoBoilerPlate = require('./commons/cognitoBoilerPlate')
 
     var data = JSON.parse(event.body);
 
-    var poolData = {
-        UserPoolId : process.env.USER_POOL_ID, // eslint-disable-line
-        ClientId : process.env.CLIENT_ID // eslint-disable-line
-    };
+    var poolData = cognitoBoilerPlate.helper.poolData(process.env.CLIENT_ID, process.env.USER_POOL_ID);
 
     var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 

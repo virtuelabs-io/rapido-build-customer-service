@@ -2,7 +2,6 @@
 # Rapidobuild.com Authentication Service
 Rapido build authentication service responsible for the following:
 - Sign Up
-- Activation
 
 #### AWS Services used:
 - IAM Roles
