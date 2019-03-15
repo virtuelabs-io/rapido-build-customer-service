@@ -1,3 +1,4 @@
+/* eslint-disable */
 const util = require('util');
 const lambda = require('../src/resendConfirmationCode');
 const handler = util.promisify(lambda.fun);
