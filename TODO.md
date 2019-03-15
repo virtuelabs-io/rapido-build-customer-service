@@ -1,7 +1,6 @@
 # TODO List
 
 ## API's remaining
-- Confirm registration
 - User sign in
 - Retrive user attributes
 - Change a password
