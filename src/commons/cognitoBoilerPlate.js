@@ -12,7 +12,15 @@ var cognitoUser = function(username, userPool){
     };
 }
 
+var cognitoCredentials = function(username, password){
+    return {
+        Username: username,
+        Password: password
+    }
+}
+
 module.exports.helper = {
     poolData: poolData,
-    cognitoUser: cognitoUser
+    cognitoUser: cognitoUser,
+    cognitoCredentials: cognitoCredentials
 }

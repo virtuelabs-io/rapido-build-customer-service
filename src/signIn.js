@@ -6,23 +6,32 @@ module.exports.fun = async (event, context) => {
     var responseHandler = require('./commons/response');
     var cognitoBoilerPlate = require('./commons/cognitoBoilerPlate')
 
+    var data = JSON.parse(event.body);
+    var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(cognitoBoilerPlate.helper.cognitoCredentials(
+        data.username,
+        data.password
+    ));
+
     var poolData = cognitoBoilerPlate.helper.poolData(process.env.CLIENT_ID, process.env.USER_POOL_ID); // eslint-disable-line
     var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-    var data = JSON.parse(event.body);
+
     var cognitoUser = new AmazonCognitoIdentity.CognitoUser(cognitoBoilerPlate.helper.cognitoUser(data.username, userPool));
 
-    async function confirmRegistration(confirmationCode) {
+    async function signIn(authenticationDetails) {
         try {
             return new Promise( resolve => {
-                cognitoUser.confirmRegistration(confirmationCode, true, function(err, result) {
-                    if (err) {
+                cognitoUser.authenticateUser(authenticationDetails, {
+                    onSuccess: function (result) {
+                        // eslint-disable-next-line
+                        console.log('Successfully signed user in:' + cognitoUser.getUsername());
+                        resolve(responseHandler.helper.get({
+                            token: result.getAccessToken().getJwtToken()
+                        }));
+                    },
+                    onFailure: function(err) {
                         // eslint-disable-next-line
                         console.log(err);
-                        return;
                     }
-                    // eslint-disable-next-line
-                    console.log('Successfully confirmed user:' + cognitoUser.getUsername());
-                    resolve(responseHandler.helper.get(result));
                 });
             })
         } catch (e) {
@@ -32,7 +41,7 @@ module.exports.fun = async (event, context) => {
         }
     }
 
-    let result = await confirmRegistration(data.confirmationCode);
+    let result = await signIn(authenticationDetails);
 
     context.succeed(result);
 };

@@ -16,4 +16,10 @@ describe(`Cognito helpers`, () => {
     expect(cognitoUser.Pool).toEqual("userPool");
   });
 
+  test(`Cognito credentails data helper`, () => {
+    var cognitoCredentials = cognitoBoilerPlate.helper.cognitoCredentials("+440000000000", "password");
+    expect(cognitoCredentials.Username).toEqual("+440000000000");
+    expect(cognitoCredentials.Password).toEqual("password");
+  });
+
 });

@@ -16,7 +16,8 @@ module.exports.fun = async (event, context) => {
             return new Promise( resolve => {
                 cognitoUser.resendConfirmationCode(function(err, result) {
                     if (err) {
-                        alert(err);
+                        // eslint-disable-next-line
+                        console.log(err);
                         return;
                     }
                     // eslint-disable-next-line
