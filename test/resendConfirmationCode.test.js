@@ -1,8 +1,8 @@
 const util = require('util');
-const lambda = require('../src/signUp');
+const lambda = require('../src/resendConfirmationCode');
 const handler = util.promisify(lambda.fun);
 
-describe(`Authentication: SignUp tests`, () => {
+describe(`Authentication: ResendConfirmationCode tests`, () => {
 
   afterEach(() => {
     process.env.CLIENTID='435fsd456fg564'

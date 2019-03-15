@@ -5,6 +5,14 @@ var poolData = function(clientId, userPoolId){
     }
 }
 
+var cognitoUser = function(username, userPool){
+    return {
+        Username : username,
+        Pool : userPool
+    };
+}
+
 module.exports.helper = {
-    poolData: poolData
+    poolData: poolData,
+    cognitoUser: cognitoUser
 }
