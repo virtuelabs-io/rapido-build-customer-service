@@ -36,6 +36,21 @@ functions:
         #   authorizer:
         #     name: authorizer
         #     arn: arn:aws:cognito-idp:eu-west-2:007938441437:userpool/eu-west-2_ZmuHKSNeS
+  resendConfirmationCode:
+    name: resendConfirmationCode-${self:provider.stage}
+    role: AuthenticationFunctionsLambdaRole
+    handler: src/resendConfirmationCode.fun
+    memorySize: 128
+    timeout: 10
+    environment:
+      USER_POOL_ID: ${self:provider.cognito-user-pool-id}
+      CLIENT_ID: ${self:provider.cognito-client-id}
+    tags:
+      purpose: lambda function to resend confirmation code
+    events:
+      - http:
+          path: /auth/resend-confirmation-code
+          method: post
 
 # plugins:
 #   - serverless-domain-manager
