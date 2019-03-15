@@ -1,9 +1,9 @@
 /* eslint-disable */
 const util = require('util');
-const lambda = require('../src/resendConfirmationCode');
+const lambda = require('../src/confirmRegistration');
 const handler = util.promisify(lambda.fun);
 
-describe(`Authentication: ResendConfirmationCode tests`, () => {
+describe(`Authentication: Confirm Registration tests`, () => {
 
   afterEach(() => {
     process.env.CLIENTID='435fsd456fg564'

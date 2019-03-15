@@ -19,7 +19,19 @@ var isa = function (body) {
     }
 }
 
+// Successful get
+var get = function (body) {
+    return {
+        statusCode: 200,
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+}
+
 module.exports.helper = {
     created: created,
-    isa: isa
+    isa: isa,
+    get: get
 }

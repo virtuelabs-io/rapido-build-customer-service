@@ -52,6 +52,22 @@ functions:
           path: /auth/resend-confirmation-code
           method: post
 
+  confirmRegistration:
+    name: confirmRegistration-${self:provider.stage}
+    role: AuthenticationFunctionsLambdaRole
+    handler: src/confirmRegistration.fun
+    memorySize: 128
+    timeout: 10
+    environment:
+      USER_POOL_ID: ${self:provider.cognito-user-pool-id}
+      CLIENT_ID: ${self:provider.cognito-client-id}
+    tags:
+      purpose: lambda function to confirmRegistration
+    events:
+      - http:
+          path: /auth/confirm-registration
+          method: post
+
 # plugins:
 #   - serverless-domain-manager
 
