@@ -25,7 +25,11 @@ module.exports.fun = async (event, context) => {
                         // eslint-disable-next-line
                         console.log('Successfully signed user in:' + cognitoUser.getUsername());
                         resolve(responseHandler.helper.get({
-                            token: result.getAccessToken().getJwtToken()
+                            accessToken: result.getAccessToken().getJwtToken(),
+                            refreshToken: result.getRefreshToken().getToken(),
+                            idToken: result.getIdToken().getJwtToken(),
+                            accessTokenExpiration: result.getAccessToken().getExpiration(),
+                            idTokenExpiration: result.getIdToken().getExpiration()
                         }));
                     },
                     onFailure: function(err) {
