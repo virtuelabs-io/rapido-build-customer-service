@@ -74,7 +74,7 @@ functions:
     role: AuthenticationFunctionsLambdaRole
     handler: src/signIn.fun
     memorySize: 128
-    timeout: 10
+    timeout: 20
     environment:
       USER_POOL_ID: ${self:provider.cognito-user-pool-id}
       CLIENT_ID: ${self:provider.cognito-client-id}
