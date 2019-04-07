@@ -16,6 +16,7 @@ module.exports.fun = async (event, context, callback) => {
             connection.destroy();
             throw error;
         } else {
+            console.log(results);
             callback(error, results);
             connection.end(function (err) { callback(err, results);});
         }

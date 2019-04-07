@@ -19,6 +19,10 @@ package:
     - test/**
     - .git/**
     - .serverless/**
+    - coverage/**
+    - README.md
+    - TODO.md
+    - LICENSE
 
 functions:
   getCustomerCompanyDetails:
@@ -38,7 +42,7 @@ functions:
     events:
       - http:
           path: /customer/company
-          method: put
+          method: get
           integration: lambda
         #   authorizer:
         #     name: authorizer
