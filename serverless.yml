@@ -11,6 +11,11 @@ provider:
   username: ${env:USERNAME}
   password: ${env:PASSWORD}
   # cognito-arn: ${env:COGNITO_ARN}
+  vpc:
+    subnetIds:
+      - ${env:SUBNET_1}
+      - ${env:SUBNET_2}
+      - ${env:SUBNET_3}
 
 package:
   individually: true

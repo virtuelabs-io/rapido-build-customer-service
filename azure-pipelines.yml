@@ -63,6 +63,9 @@ steps:
     USERNAME: $(DEV_USERNAME)
     PASSWORD: $(DEV_PASSWORD)
     DATABASE: $(DEV_DATABASE)
+    SUBNET_1: $(SUBNET_1)
+    SUBNET_2: $(SUBNET_2)
+    SUBNET_3: $(SUBNET_3)
   condition: ne(variables['Build.SourceBranch'], 'refs/heads/master')
 
 - task: Npm@1
@@ -79,4 +82,7 @@ steps:
     USERNAME: $(PROD_USERNAME)
     PASSWORD: $(PROD_PASSWORD)
     DATABASE: $(PROD_DATABASE)
+    SUBNET_1: $(SUBNET_1)
+    SUBNET_2: $(SUBNET_2)
+    SUBNET_3: $(SUBNET_3)
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
