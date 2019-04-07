@@ -11,6 +11,7 @@ var connection = mysql.createConnection({
 
 module.exports.fun = async (event, context, callback) => {
     global.fetch = require('node-fetch');
+    context.callbackWaitsForEmptyEventLoop = false;
     connection.query('SELECT * FROM `mysql`.`db` LIMIT 1000;', function (error, results) {
         if (error) {
             connection.destroy();
