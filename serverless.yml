@@ -12,6 +12,8 @@ provider:
   password: ${env:PASSWORD}
   # cognito-arn: ${env:COGNITO_ARN}
   vpc:
+    securityGroupIds:
+      - ${env:SG_1}
     subnetIds:
       - ${env:SUBNET_1}
       - ${env:SUBNET_2}

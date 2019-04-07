@@ -66,6 +66,7 @@ steps:
     SUBNET_1: $(SUBNET_1)
     SUBNET_2: $(SUBNET_2)
     SUBNET_3: $(SUBNET_3)
+    SG_1: $(SG_1)
   condition: ne(variables['Build.SourceBranch'], 'refs/heads/master')
 
 - task: Npm@1
@@ -85,4 +86,5 @@ steps:
     SUBNET_1: $(SUBNET_1)
     SUBNET_2: $(SUBNET_2)
     SUBNET_3: $(SUBNET_3)
+    SG_1: $(SG_1)
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
