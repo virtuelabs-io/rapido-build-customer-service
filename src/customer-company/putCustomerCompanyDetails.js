@@ -20,12 +20,12 @@ module.exports.fun = async (event, context, callback) => {
         SET company_name = ?,
             vat_number = ?,
             addr_1 = ?,
-            addr_2 = ?
+            addr_2 = ?,
             city = ?,
             county = ?,
             country = ?,
             postcode = ?
-        WHERE customer_id = ?;
+        WHERE customer_id = UUID_TO_BIN(?);
     `;
 
     console.log("Running query", query);
