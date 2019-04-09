@@ -55,18 +55,14 @@ steps:
     command: custom
     customCommand: 'run dev-deploy'
   env:
-    AWS_ACCESS_KEY_ID: $(DEV_AWS_ACCESS_KEY_ID)
-    AWS_SECRET_ACCESS_KEY: $(DEV_AWS_SECRET_ACCESS_KEY)
-    COGNITO_ARN: $(DEV_COGNITO_ARN)
-    HOST: $(DEV_HOST)
-    PORT: $(DEV_PORT)
-    USERNAME: $(DEV_USERNAME)
-    PASSWORD: $(DEV_PASSWORD)
-    DATABASE: $(DEV_DATABASE)
-    SUBNET_1: $(SUBNET_1)
-    SUBNET_2: $(SUBNET_2)
-    SUBNET_3: $(SUBNET_3)
-    SG_1: sg-096022b343ba52811
+    AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+    AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+    COGNITO_ARN: $(COGNITO_ARN)
+    HOST: $(HOST)
+    PORT: $(PORT)
+    USERNAME: $(USERNAME)
+    PASSWORD: $(PASSWORD)
+    DATABASE: $(DATABASE)
   condition: ne(variables['Build.SourceBranch'], 'refs/heads/master')
 
 - task: Npm@1
@@ -75,16 +71,12 @@ steps:
     command: custom
     customCommand: 'run dev-deploy' # will be changed to prod when we are going to go live
   env:
-    AWS_ACCESS_KEY_ID: $(PROD_AWS_ACCESS_KEY_ID)
-    AWS_SECRET_ACCESS_KEY: $(PROD_AWS_SECRET_ACCESS_KEY)
-    COGNITO_ARN: $(PROD_COGNITO_ARN)
-    HOST: $(PROD_HOST)
-    PORT: $(PROD_PORT)
-    USERNAME: $(PROD_USERNAME)
-    PASSWORD: $(PROD_PASSWORD)
-    DATABASE: $(PROD_DATABASE)
-    SUBNET_1: $(SUBNET_1)
-    SUBNET_2: $(SUBNET_2)
-    SUBNET_3: $(SUBNET_3)
-    SG_1: sg-096022b343ba52811
+    AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+    AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+    COGNITO_ARN: $(COGNITO_ARN)
+    HOST: $(HOST)
+    PORT: $(PORT)
+    USERNAME: $(USERNAME)
+    PASSWORD: $(PASSWORD)
+    DATABASE: $(DATABASE)
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
