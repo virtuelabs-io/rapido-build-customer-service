@@ -5,8 +5,10 @@ Service responsible for all customer data
 
 ## API's Available
 
-- getCustomerCompanyDetails
+- **getCustomerCompanyDetails**
   - GET
   - POST
+  - PUT
+  - DELETE
 
 > **Note**: Authenticated with Cognito

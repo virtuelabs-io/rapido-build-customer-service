@@ -14,20 +14,4 @@ describe(`Testing: postCustomerCompanyDetails`, () => {
     test(`The handler exists`, () => {
       expect(handler).toBeTruthy();
     });
-  
-    test(`Asks for environment variables`, async () => {
-        const result = await handler({
-            "body": {
-              "company_name": "test",
-              "vat_number": "test",
-              "addr_1": "test/2",
-              "addr_2": "test 1",
-              "city": "test",
-              "county": "test",
-              "country": "test",
-              "postcode": "test"
-            }
-        }, {})
-        expect(result).not.toBeNull()
-    });
 });

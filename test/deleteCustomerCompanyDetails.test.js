@@ -1,8 +1,8 @@
 const util = require("util");
-const lambda = require("../src/customer-company/getCustomerCompanyDetails");
+const lambda = require("../src/customer-company/deleteCustomerCompanyDetails");
 const handler = util.promisify(lambda.fun);
 
-describe(`Testing: getCustomerCompanyDetails`, () => {
+describe(`Testing: deleteCustomerCompanyDetails`, () => {
     beforeEach(() => {
         process.env.HOST = "localhost";
         process.env.PORT = "3306";

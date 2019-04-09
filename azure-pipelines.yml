@@ -29,25 +29,25 @@ steps:
   inputs:
     command: install
 
-# - task: Npm@1
-#   displayName: 'npm run test'
-#   inputs:
-#     command: custom
-#     customCommand: 'run test'
+- task: Npm@1
+  displayName: 'npm run test'
+  inputs:
+    command: custom
+    customCommand: 'run test'
 
-# - task: PublishTestResults@2
-#   displayName: 'Publishing test results'
-#   condition: succeededOrFailed()
-#   inputs:
-#     testRunner: JUnit
-#     testResultsFiles: '**/junit.xml'
+- task: PublishTestResults@2
+  displayName: 'Publishing test results'
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: JUnit
+    testResultsFiles: '**/junit.xml'
 
-# - task: PublishCodeCoverageResults@1
-#   displayName: 'Publishing code coverage'
-#   inputs:
-#     codeCoverageTool: Cobertura
-#     summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/*coverage.xml'
-#     reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publishing code coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/*coverage.xml'
+    reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
 
 - task: Npm@1
   displayName: 'Deploying functions to DEV'
