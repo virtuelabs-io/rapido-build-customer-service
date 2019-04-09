@@ -1,8 +1,16 @@
 # TODO List
 
 ## API's remaining
-- Update attributes
-- Change a password
-- Forgot password flow
-- Delete a user
-- Sign out globally
+- getCustomerComapnyDetails
+  - PUT
+  - DELETE
+- getCustomerAddressdetails
+  - GET/GETLIST
+  - POST
+  - PUT
+  - DELETE
+- getCustomerPaymentDetails
+  - GET
+  - POST
+  - PUT
+  - DELETE

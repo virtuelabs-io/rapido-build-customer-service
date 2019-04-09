@@ -29,25 +29,25 @@ steps:
   inputs:
     command: install
 
-- task: Npm@1
-  displayName: 'npm run test'
-  inputs:
-    command: custom
-    customCommand: 'run test'
+# - task: Npm@1
+#   displayName: 'npm run test'
+#   inputs:
+#     command: custom
+#     customCommand: 'run test'
 
-- task: PublishTestResults@2
-  displayName: 'Publishing test results'
-  condition: succeededOrFailed()
-  inputs:
-    testRunner: JUnit
-    testResultsFiles: '**/junit.xml'
+# - task: PublishTestResults@2
+#   displayName: 'Publishing test results'
+#   condition: succeededOrFailed()
+#   inputs:
+#     testRunner: JUnit
+#     testResultsFiles: '**/junit.xml'
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publishing code coverage'
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/*coverage.xml'
-    reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
+# - task: PublishCodeCoverageResults@1
+#   displayName: 'Publishing code coverage'
+#   inputs:
+#     codeCoverageTool: Cobertura
+#     summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/*coverage.xml'
+#     reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
 
 - task: Npm@1
   displayName: 'Deploying functions to DEV'
@@ -57,8 +57,16 @@ steps:
   env:
     AWS_ACCESS_KEY_ID: $(DEV_AWS_ACCESS_KEY_ID)
     AWS_SECRET_ACCESS_KEY: $(DEV_AWS_SECRET_ACCESS_KEY)
-    USER_POOL_ID: $(DEV_USER_POOL_ID)
-    CLIENT_ID: $(DEV_CLIENT_ID)
+    COGNITO_ARN: $(DEV_COGNITO_ARN)
+    HOST: $(DEV_HOST)
+    PORT: $(DEV_PORT)
+    USERNAME: $(DEV_USERNAME)
+    PASSWORD: $(DEV_PASSWORD)
+    DATABASE: $(DEV_DATABASE)
+    SUBNET_1: $(SUBNET_1)
+    SUBNET_2: $(SUBNET_2)
+    SUBNET_3: $(SUBNET_3)
+    SG_1: sg-096022b343ba52811
   condition: ne(variables['Build.SourceBranch'], 'refs/heads/master')
 
 - task: Npm@1
@@ -69,6 +77,14 @@ steps:
   env:
     AWS_ACCESS_KEY_ID: $(PROD_AWS_ACCESS_KEY_ID)
     AWS_SECRET_ACCESS_KEY: $(PROD_AWS_SECRET_ACCESS_KEY)
-    USER_POOL_ID: $(PROD_USER_POOL_ID)
-    CLIENT_ID: $(PROD_CLIENT_ID)
+    COGNITO_ARN: $(PROD_COGNITO_ARN)
+    HOST: $(PROD_HOST)
+    PORT: $(PROD_PORT)
+    USERNAME: $(PROD_USERNAME)
+    PASSWORD: $(PROD_PASSWORD)
+    DATABASE: $(PROD_DATABASE)
+    SUBNET_1: $(SUBNET_1)
+    SUBNET_2: $(SUBNET_2)
+    SUBNET_3: $(SUBNET_3)
+    SG_1: sg-096022b343ba52811
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')

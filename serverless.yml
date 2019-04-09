@@ -1,13 +1,23 @@
-service: Authentication
+service: CustomerService
 
 provider:
   name: aws
   runtime: nodejs8.10
   stage: dev
   region: eu-west-2
-  cognito-client-id: ${env:CLIENT_ID}
-  cognito-user-pool-id: ${env:USER_POOL_ID}
-
+  host: ${env:HOST}
+  port: ${env:PORT}
+  database: ${env:DATABASE}
+  username: ${env:USERNAME}
+  password: ${env:PASSWORD}
+  # cognito-arn: ${env:COGNITO_ARN}
+  vpc:
+    securityGroupIds:
+      - sg-bdeab9d6
+    subnetIds:
+      - subnet-9c76e2f5
+      - subnet-be6d8af2
+      - subnet-e9b86893
 package:
   individually: true
   excludeDevDependencies: true
@@ -15,75 +25,61 @@ package:
     - test/**
     - .git/**
     - .serverless/**
+    - coverage/**
+    - README.md
+    - TODO.md
+    - LICENSE
 
 functions:
-  signUp:
-    name: signUp-${self:provider.stage}
-    role: AuthenticationFunctionsLambdaRole
-    handler: src/signUp.fun
+  getCustomerCompanyDetails:
+    name: getCustomerCompanyDetails-${self:provider.stage}
+    role: CustomerFunctionsLambdaRole
+    handler: src/customer-company/getCustomerCompanyDetails.fun
     memorySize: 128
     timeout: 10
     environment:
-      USER_POOL_ID: ${self:provider.cognito-user-pool-id}
-      CLIENT_ID: ${self:provider.cognito-client-id}
+      HOST: ${self:provider.host}
+      PORT: ${self:provider.port}
+      DATABASE: ${self:provider.database}
+      USERNAME: ${self:provider.username}
+      PASSWORD: ${self:provider.password}
     tags:
-      purpose: lambda function for signing up a user with cognito
+      purpose: lambda function to retrieve customer company details
     events:
       - http:
-          path: /auth/sign-up
-          method: post
-        #   integration: lambda
+          path: /customer/company
+          method: get
+          integration: lambda
         #   authorizer:
         #     name: authorizer
-        #     arn: arn:aws:cognito-idp:eu-west-2:007938441437:userpool/eu-west-2_ZmuHKSNeS
-
-  resendConfirmationCode:
-    name: resendConfirmationCode-${self:provider.stage}
-    role: AuthenticationFunctionsLambdaRole
-    handler: src/resendConfirmationCode.fun
+        #     arn: ${self:provider.cognito-arn}
+        #     claims:
+        #       - phone_number
+        #   cors:
+        #     origins:
+        #       - '*'
+        #     headers:
+        #       - Content-Type
+        #       - Authorization
+  postCustomerCompanyDetails:
+    name: postCustomerCompanyDetails-${self:provider.stage}
+    role: CustomerFunctionsLambdaRole
+    handler: src/customer-company/postCustomerCompanyDetails.fun
     memorySize: 128
     timeout: 10
     environment:
-      USER_POOL_ID: ${self:provider.cognito-user-pool-id}
-      CLIENT_ID: ${self:provider.cognito-client-id}
+      HOST: ${self:provider.host}
+      PORT: ${self:provider.port}
+      DATABASE: ${self:provider.database}
+      USERNAME: ${self:provider.username}
+      PASSWORD: ${self:provider.password}
     tags:
-      purpose: lambda function to resend confirmation code
+      purpose: lambda function to post customer company details
     events:
       - http:
-          path: /auth/resend-confirmation-code
+          path: /customer/company
           method: post
-
-  confirmRegistration:
-    name: confirmRegistration-${self:provider.stage}
-    role: AuthenticationFunctionsLambdaRole
-    handler: src/confirmRegistration.fun
-    memorySize: 128
-    timeout: 10
-    environment:
-      USER_POOL_ID: ${self:provider.cognito-user-pool-id}
-      CLIENT_ID: ${self:provider.cognito-client-id}
-    tags:
-      purpose: lambda function to confirmRegistration
-    events:
-      - http:
-          path: /auth/confirm-registration
-          method: post
-
-  signIn:
-    name: signIn-${self:provider.stage}
-    role: AuthenticationFunctionsLambdaRole
-    handler: src/signIn.fun
-    memorySize: 128
-    timeout: 20
-    environment:
-      USER_POOL_ID: ${self:provider.cognito-user-pool-id}
-      CLIENT_ID: ${self:provider.cognito-client-id}
-    tags:
-      purpose: lambda function to signIn users
-    events:
-      - http:
-          path: /auth/sign-in
-          method: post
+          integration: lambda
 
 # plugins:
 #   - serverless-domain-manager
@@ -98,7 +94,7 @@ functions:
 
 resources:
   Resources:
-    AuthenticationFunctionsLambdaRole:
+    CustomerFunctionsLambdaRole:
       Type: AWS::IAM::Role
       Properties:
         AssumeRolePolicyDocument:
@@ -125,4 +121,13 @@ resources:
                 Effect: Allow
                 Action:
                   - "lambda:InvokeFunction"
+                Resource: "*"
+          - PolicyName: VPCAccess
+            PolicyDocument:
+              Statement:
+                Effect: Allow
+                Action:
+                  - "ec2:CreateNetworkInterface"
+                  - "ec2:DescribeNetworkInterfaces"
+                  - "ec2:DeleteNetworkInterface"
                 Resource: "*"
