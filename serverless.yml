@@ -80,6 +80,25 @@ functions:
           path: /customer/company
           method: post
           integration: lambda
+  putCustomerCompanyDetails:
+    name: putCustomerCompanyDetails-${self:provider.stage}
+    role: CustomerFunctionsLambdaRole
+    handler: src/customer-company/putCustomerCompanyDetails.fun
+    memorySize: 128
+    timeout: 10
+    environment:
+      HOST: ${self:provider.host}
+      PORT: ${self:provider.port}
+      DATABASE: ${self:provider.database}
+      USERNAME: ${self:provider.username}
+      PASSWORD: ${self:provider.password}
+    tags:
+      purpose: lambda function to update customer company details
+    events:
+      - http:
+          path: /customer/company
+          method: put
+          integration: lambda
 
 # plugins:
 #   - serverless-domain-manager
