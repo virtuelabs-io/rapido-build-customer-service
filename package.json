@@ -5,9 +5,9 @@
   "scripts": {
     "test": "jest --ci --reporters=jest-junit --reporters=default --coverage --coverageReporters=cobertura --coverageReporters=html",
     "codecov": "npm run test & npm run codecov",
-    "dev-deploy": "serverless deploy --stage dev",
+    "dev-deploy": "serverless deploy --stage stage",
     "prod-deploy": "serverless deploy --stage prod",
-    "dev-remove": "serverless remove --stage dev",
+    "dev-remove": "serverless remove --stage stage",
     "prod-remove": "serverless remove --stage prod",
     "lint": "./node_modules/.bin/eslint src"
   },

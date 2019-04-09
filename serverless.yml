@@ -1,4 +1,4 @@
-service: Customer
+service: CustomerService
 
 provider:
   name: aws
@@ -13,12 +13,11 @@ provider:
   # cognito-arn: ${env:COGNITO_ARN}
   vpc:
     securityGroupIds:
-      - ${env:SG_1}
+      - sg-bdeab9d6
     subnetIds:
-      - ${env:SUBNET_1}
-      - ${env:SUBNET_2}
-      - ${env:SUBNET_3}
-
+      - subnet-9c76e2f5
+      - subnet-be6d8af2
+      - subnet-e9b86893
 package:
   individually: true
   excludeDevDependencies: true
@@ -35,7 +34,7 @@ functions:
   getCustomerCompanyDetails:
     name: getCustomerCompanyDetails-${self:provider.stage}
     role: CustomerFunctionsLambdaRole
-    handler: src/customer/getCustomerCompanyDetails.fun
+    handler: src/customer-company/getCustomerCompanyDetails.fun
     memorySize: 128
     timeout: 10
     environment:
@@ -62,6 +61,25 @@ functions:
         #     headers:
         #       - Content-Type
         #       - Authorization
+  postCustomerCompanyDetails:
+    name: postCustomerCompanyDetails-${self:provider.stage}
+    role: CustomerFunctionsLambdaRole
+    handler: src/customer-company/postCustomerCompanyDetails.fun
+    memorySize: 128
+    timeout: 10
+    environment:
+      HOST: ${self:provider.host}
+      PORT: ${self:provider.port}
+      DATABASE: ${self:provider.database}
+      USERNAME: ${self:provider.username}
+      PASSWORD: ${self:provider.password}
+    tags:
+      purpose: lambda function to post customer company details
+    events:
+      - http:
+          path: /customer/company
+          method: post
+          integration: lambda
 
 # plugins:
 #   - serverless-domain-manager
@@ -103,4 +121,13 @@ resources:
                 Effect: Allow
                 Action:
                   - "lambda:InvokeFunction"
+                Resource: "*"
+          - PolicyName: VPCAccess
+            PolicyDocument:
+              Statement:
+                Effect: Allow
+                Action:
+                  - "ec2:CreateNetworkInterface"
+                  - "ec2:DescribeNetworkInterfaces"
+                  - "ec2:DeleteNetworkInterface"
                 Resource: "*"

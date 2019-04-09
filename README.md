@@ -2,6 +2,6 @@
 
 ## API's Available
 
-- Customer Profile
+- getCustomerCompanyDetails
   - GET
   - POST
