@@ -27,3 +27,5 @@ INSERT INTO `customer`.`company` (
 SELECT  *
 FROM customer.company 
 WHERE a.customer_id = UUID_TO_BIN('08bb88a0-5ac3-11e9-8647-d663bd873d93');
+
+delete from customer.company where customer_id <> UUID_TO_BIN('08bb88a0-5ac3-11e9-8647-d663bd873d93');
