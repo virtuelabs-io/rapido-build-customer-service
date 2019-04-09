@@ -1,16 +1,13 @@
 # TODO List
 
 ## API's remaining
-- getCustomerComapnyDetails
-  - PUT
-  - DELETE
 - getCustomerAddressdetails
   - GET/GETLIST
   - POST
   - PUT
   - DELETE
 - getCustomerPaymentDetails
-  - GET
+  - GET/GETLIST
   - POST
   - PUT
   - DELETE
