@@ -15,19 +15,19 @@ module.exports.fun = async (event, context, callback) => {
     console.log(event)
     let customer_id = event.cognitoPoolClaims.sub
     let query = `
-        SELECT  BIN_TO_UUID(customer_id) as customer_id,
-                company_name,
-                addr_1,
-                addr_2,
-                city,
-                county,
-                country,
-                postcode
-        FROM customer.company 
+        SELECT  id,
+                BIN_TO_UUID(customer_id) as customer_id,
+                name_on_card,
+                RIGHT(card_number, 4) as card_number,
+                expirity_month,
+                expirity_year,
+                address_id,
+                payment_type_id
+        FROM customer.payment 
         WHERE customer_id = UUID_TO_BIN(?);
     `;
     console.log("Running query", query);
     let results = await mysql.query(query, [customer_id])
     await mysql.end()
-    return results[0]
+    return results
 }

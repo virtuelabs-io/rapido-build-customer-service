@@ -10,5 +10,19 @@ Service responsible for all customer data
   - POST
   - PUT
   - DELETE
+- **getCustomerAddress**
+  - GET
+  - GETLIST
+  - POST
+  - PUT
+  - DELETE
+  - DELETELIST
+- **getCustomerPaymentDetails**
+  - GET
+  - GETLIST
+  - POST
+  - PUT
+  - DELETE
+  - DELETELIST
 
 > **Note**: Authenticated with Cognito

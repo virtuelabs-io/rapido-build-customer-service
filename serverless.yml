@@ -343,6 +343,198 @@ functions:
             headers:
               - Content-Type
               - Authorization
+  getCustomerPaymentDetailsList:
+    name: getCustomerPaymentDetailsList-${self:provider.stage}
+    role: CustomerFunctionsLambdaRole
+    handler: src/customer-payment/getCustomerPaymentDetailsList.fun
+    memorySize: 128
+    timeout: 10
+    environment:
+      HOST: ${self:provider.host}
+      PORT: ${self:provider.port}
+      DATABASE: ${self:provider.database}
+      USERNAME: ${self:provider.username}
+      PASSWORD: ${self:provider.password}
+    tags:
+      purpose: lambda function to retrieve customer payment List
+    events:
+      - http:
+          path: /customer/payment-list
+          method: get
+          integration: lambda
+          authorizer:
+            name: authorizer
+            arn: ${self:provider.cognito-arn}
+            claims:
+              - phone_number
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - Authorization
+  getCustomerPaymentDetails:
+    name: getCustomerPaymentDetails-${self:provider.stage}
+    role: CustomerFunctionsLambdaRole
+    handler: src/customer-payment/getCustomerPaymentDetails.fun
+    memorySize: 128
+    timeout: 10
+    environment:
+      HOST: ${self:provider.host}
+      PORT: ${self:provider.port}
+      DATABASE: ${self:provider.database}
+      USERNAME: ${self:provider.username}
+      PASSWORD: ${self:provider.password}
+    tags:
+      purpose: lambda function to retrieve customer payment
+    events:
+      - http:
+          path: /customer/payment/{id}
+          method: get
+          request: 
+            parameters: 
+              paths: 
+                id: true
+          integration: lambda
+          authorizer:
+            name: authorizer
+            arn: ${self:provider.cognito-arn}
+            claims:
+              - phone_number
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - Authorization
+  postCustomerPaymentDetails:
+    name: postCustomerPaymentDetails-${self:provider.stage}
+    role: CustomerFunctionsLambdaRole
+    handler: src/customer-payment/postCustomerPaymentDetails.fun
+    memorySize: 128
+    timeout: 10
+    environment:
+      HOST: ${self:provider.host}
+      PORT: ${self:provider.port}
+      DATABASE: ${self:provider.database}
+      USERNAME: ${self:provider.username}
+      PASSWORD: ${self:provider.password}
+    tags:
+      purpose: lambda function to post customer payment
+    events:
+      - http:
+          path: /customer/payment
+          method: post
+          integration: lambda
+          authorizer:
+            name: authorizer
+            arn: ${self:provider.cognito-arn}
+            claims:
+              - phone_number
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - Authorization
+  putCustomerPaymentDetails:
+    name: putCustomerPaymentDetails-${self:provider.stage}
+    role: CustomerFunctionsLambdaRole
+    handler: src/customer-payment/putCustomerPaymentDetails.fun
+    memorySize: 128
+    timeout: 10
+    environment:
+      HOST: ${self:provider.host}
+      PORT: ${self:provider.port}
+      DATABASE: ${self:provider.database}
+      USERNAME: ${self:provider.username}
+      PASSWORD: ${self:provider.password}
+    tags:
+      purpose: lambda function to put customer payment
+    events:
+      - http:
+          path: /customer/payment/{id}
+          method: put
+          request: 
+            parameters: 
+              paths: 
+                id: true
+          integration: lambda
+          authorizer:
+            name: authorizer
+            arn: ${self:provider.cognito-arn}
+            claims:
+              - phone_number
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - Authorization
+  deleteCustomerPaymentDetailsList:
+    name: deleteCustomerPaymentDetailsList-${self:provider.stage}
+    role: CustomerFunctionsLambdaRole
+    handler: src/customer-payment/deleteCustomerPaymentDetailsList.fun
+    memorySize: 128
+    timeout: 10
+    environment:
+      HOST: ${self:provider.host}
+      PORT: ${self:provider.port}
+      DATABASE: ${self:provider.database}
+      USERNAME: ${self:provider.username}
+      PASSWORD: ${self:provider.password}
+    tags:
+      purpose: lambda function to delete customer payment list
+    events:
+      - http:
+          path: /customer/payment-list
+          method: delete
+          integration: lambda
+          authorizer:
+            name: authorizer
+            arn: ${self:provider.cognito-arn}
+            claims:
+              - phone_number
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - Authorization
+  deleteCustomerPaymentDetails:
+    name: deleteCustomerPaymentDetails-${self:provider.stage}
+    role: CustomerFunctionsLambdaRole
+    handler: src/customer-payment/deleteCustomerPaymentDetails.fun
+    memorySize: 128
+    timeout: 10
+    environment:
+      HOST: ${self:provider.host}
+      PORT: ${self:provider.port}
+      DATABASE: ${self:provider.database}
+      USERNAME: ${self:provider.username}
+      PASSWORD: ${self:provider.password}
+    tags:
+      purpose: lambda function to delete customer payment
+    events:
+      - http:
+          path: /customer/payment/{id}
+          method: delete
+          request: 
+            parameters: 
+              paths: 
+                id: true
+          integration: lambda
+          authorizer:
+            name: authorizer
+            arn: ${self:provider.cognito-arn}
+            claims:
+              - phone_number
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - Authorization
 
 # plugins:
 #   - serverless-domain-manager

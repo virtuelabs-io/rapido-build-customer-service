@@ -18,7 +18,6 @@ module.exports.fun = async (event, context, callback) => {
     let query = `
         UPDATE customer.company 
         SET company_name = ?,
-            vat_number = ?,
             addr_1 = ?,
             addr_2 = ?,
             city = ?,
@@ -31,7 +30,6 @@ module.exports.fun = async (event, context, callback) => {
     console.log("Running query", query);
     let results = await mysql.query(query, [
             data.company_name,
-            data.vat_number,
             data.addr_1,
             data.addr_2,
             data.city,
