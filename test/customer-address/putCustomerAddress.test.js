@@ -1,8 +1,8 @@
 const util = require("util");
-const lambda = require("../src/customer-company/postCustomerCompanyDetails");
+const lambda = require("../../src/customer-address/putCustomerAddress");
 const handler = util.promisify(lambda.fun);
 
-describe(`Testing: postCustomerCompanyDetails`, () => {
+describe(`Testing: putCustomerAddress`, () => {
     beforeEach(() => {
         process.env.HOST = "localhost";
         process.env.PORT = "3306";
