@@ -1,23 +1,4 @@
-Skip to content
-
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- @reddy-s Sign out
-2,746
-80,344 38,643 github/gitignore
- Code  Pull requests 83  Projects 0  Insights
-gitignore/Node.gitignore
-@Richienb Richienb [Node] Ignore diagnostic report files (#2971)
-1436b29  3 days ago
-@stuartpb @shiftkey @TennyZhuang @venatoria @ro31337 @melonmanchan @gouthamve @jucrouzet @cheddar @arcresu @kesoji @tejashah88 @sroberts @segayuu @Richienb @rgbkrk @rsolomo @peat @noinkling @MikeRalphson @lmedson @shtr0m @kerimdzhanov @joreyaesh @jenrik @jefrydco
-84 lines (59 sloc)  1.22 KB
-
-# Logs
-logs
+# logs
 *.log
 npm-debug.log*
 yarn-debug.log*

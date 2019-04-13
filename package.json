@@ -1,7 +1,7 @@
 {
-  "name": "rapido-build-auth",
+  "name": "rapido-build-customer-service",
   "version": "1.0.0",
-  "description": "Rapido build authentication",
+  "description": "Rapido build Customer Service",
   "scripts": {
     "test": "jest --ci --reporters=jest-junit --reporters=default --coverage --coverageReporters=cobertura --coverageReporters=html",
     "codecov": "npm run test & npm run codecov",
@@ -11,7 +11,7 @@
     "prod-remove": "serverless remove --stage prod",
     "lint": "./node_modules/.bin/eslint src"
   },
-  "author": "",
+  "author": "Sangram Reddy",
   "license": "ISC",
   "devDependencies": {
     "aws-sdk": "^2.421.0",
