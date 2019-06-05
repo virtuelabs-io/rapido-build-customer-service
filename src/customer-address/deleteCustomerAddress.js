@@ -16,7 +16,7 @@ module.exports.fun = async (event, context, callback) => {
     let customer_id = event.cognitoPoolClaims.sub
     let address_id = Number(event.path.id)
     let query = `
-        DELETE FROM customer.address 
+        DELETE FROM customer.address
         WHERE id = ?
         AND   customer_id = UUID_TO_BIN(?);
     `;
