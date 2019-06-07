@@ -63,6 +63,7 @@ steps:
     USERNAME: $(USERNAME)
     PASSWORD: $(PASSWORD)
     DATABASE: $(DATABASE)
+    CERTIFICATE_ARN: $(CERTIFICATE_ARN)
   condition: ne(variables['Build.SourceBranch'], 'refs/heads/master')
 
 - task: Npm@1
@@ -79,4 +80,5 @@ steps:
     USERNAME: $(USERNAME)
     PASSWORD: $(PASSWORD)
     DATABASE: $(DATABASE)
+    CERTIFICATE_ARN: $(CERTIFICATE_ARN)
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')

@@ -5,9 +5,9 @@
   "scripts": {
     "test": "jest --ci --reporters=jest-junit --reporters=default --coverage --coverageReporters=cobertura --coverageReporters=html",
     "codecov": "npm run test & npm run codecov",
-    "dev-deploy": "serverless deploy --stage stage",
+    "dev-deploy": "serverless deploy --stage dev",
     "prod-deploy": "serverless deploy --stage prod",
-    "dev-remove": "serverless remove --stage stage",
+    "dev-remove": "serverless remove --stage dev",
     "prod-remove": "serverless remove --stage prod",
     "lint": "./node_modules/.bin/eslint src"
   },
@@ -23,7 +23,7 @@
     "json-loader": "^0.5.7",
     "prettier": "^1.16.4",
     "serverless": "^1.38.0",
-    "serverless-domain-manager": "^3.2.2",
+    "serverless-domain-manager": "^2.6.6",
     "serverless-offline": "^4.9.0",
     "serverless-webpack": "^5.2.0",
     "webpack": "^4.29.6"

@@ -12,6 +12,12 @@ provider:
   password: ${env:PASSWORD}
   cognito-arn: ${env:COGNITO_ARN}
   certificate-arn: ${env:CERTIFICATE_ARN}
+  logRetentionInDays: 7
+#   tracing:
+#     lambda: true
+#     apiGateway: true
+  logs:
+    restApi: true
   vpc:
     securityGroupIds:
       - sg-bdeab9d6
@@ -345,20 +351,18 @@ functions:
               - Content-Type
               - Authorization
 
-# plugins:
-#   - serverless-domain-manager
+plugins:
+  - serverless-domain-manager
 
-# custom:
-#   customDomain:
-#     domainName: rapidobuild.com
-#     hostedZoneId: Z1GNEXLCEVVPWJ
-#     basePath: ''
-#     stage: ${self:provider.stage}
-#     createRoute53Record: true
-#     certificateArn: arn:aws:acm:eu-west-2:007938441437:certificate/44ab76a9-129c-4065-ab53-dd887942fcf7
-#     regionalCertificateArn: arn:aws:acm:eu-west-2:007938441437:certificate/44ab76a9-129c-4065-ab53-dd887942fcf7
-#     certificateName: '*.rapidobuild.com'
-#     endpointType: 'regional'
+custom:
+  customDomain:
+    domainName: api.rapidobuild.com
+    hostedZoneId: Z1GNEXLCEVVPWJ
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+    certificateArn: ${self:provider.certificate-arn}
+    endpointType: 'regional'
 
 resources:
   Resources:
