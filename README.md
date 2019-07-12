@@ -38,7 +38,7 @@ serverless delete_domain --profile <profile name>
 
 Deploy it on `AWS`
 
-```sh
+```sh  
 # To deploy
 serverless deploy --stage staging --profile <profile name>
 # To delete
