@@ -351,19 +351,6 @@ functions:
               - Content-Type
               - Authorization
 
-plugins:
-  - serverless-domain-manager
-
-custom:
-  customDomain:
-    domainName: api.rapidobuild.com
-    hostedZoneId: Z1GNEXLCEVVPWJ
-    basePath: ''
-    stage: ${self:provider.stage}
-    createRoute53Record: true
-    certificateArn: ${self:provider.certificate-arn}
-    endpointType: 'regional'
-
 resources:
   Resources:
     CustomerFunctionsLambdaRole:
