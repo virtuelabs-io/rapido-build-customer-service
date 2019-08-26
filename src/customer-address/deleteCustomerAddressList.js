@@ -15,7 +15,9 @@ module.exports.fun = async (event, context, callback) => {
     console.log(event)
     let customer_id = event.cognitoPoolClaims.sub
     let query = `
-        DELETE FROM customer.address WHERE customer_id = UUID_TO_BIN(?);
+        UPDATE customer.address
+        SET active = FALSE
+        WHERE customer_id = UUID_TO_BIN(?);
     `;
     console.log("Running query", query);
     let results = await mysql.query(query, [customer_id])
