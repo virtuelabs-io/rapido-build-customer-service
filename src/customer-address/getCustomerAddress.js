@@ -26,7 +26,7 @@ module.exports.fun = async (event, context, callback) => {
                 county,
                 country,
                 postcode
-        FROM customer.address 
+        FROM customer.address
         WHERE id = ?
         AND   customer_id = UUID_TO_BIN(?)
         LIMIT 1;
