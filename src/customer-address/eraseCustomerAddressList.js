@@ -1,3 +1,4 @@
+// headless
 'use strict';
 
 const mysql = require('serverless-mysql')({
