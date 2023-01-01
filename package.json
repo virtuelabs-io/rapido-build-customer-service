@@ -28,7 +28,7 @@
     "serverless-domain-manager": "^2.6.6",
     "serverless-offline": "^4.9.0",
     "serverless-webpack": "^5.2.0",
-    "webpack": "^4.29.6"
+    "webpack": "^5.75.0"
   },
   "dependencies": {
     "mysql": "^2.16.0",
